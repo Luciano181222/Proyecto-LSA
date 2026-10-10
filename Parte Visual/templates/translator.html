@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traductor — Señas</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <button class="theme-toggle" type="button" aria-label="Cambiar tema" title="Cambiar tema">☾</button>
+    <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">S</span><span>señas<span class="brand-dot">.</span></span></a>
+    <nav class="main-nav" aria-label="Navegación del traductor">
+      <a href="{{ url_for('index') }}#como-funciona">Cómo funciona</a>
+      <a href="{{ url_for('index') }}#nosotros">Nosotros</a>
+    </nav>
+    <div class="header-actions">
+      <span class="welcome">Hola, {{ usuario }}</span>
+      <form action="{{ url_for('logout') }}" method="post">
+        <button class="btn btn-outline btn-small" type="submit">Cerrar sesión</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="translator-page section-wrap">
+    <div class="translator-topbar">
+      <div class="eyebrow">ESPACIO DE TRADUCCIÓN</div>
+      <div class="status-pills" aria-label="Estado del prototipo">
+        <span class="status-pill status-pill-live">Demo activa</span>
+        <span class="status-pill">Cámara web</span>
+      </div>
+    </div>
+
+    <div class="translator-header">
+      <div>
+        <h1>Tu espacio para <span>comunicar.</span></h1>
+        <p class="translator-intro">Permití el acceso a tu cámara para probar la vista previa. Esta demo muestra el video, pero todavía no interpreta señas: para eso hace falta conectar un modelo de reconocimiento entrenado.</p>
+      </div>
+
+      <div class="translator-stats" aria-label="Resumen del proyecto">
+        <div class="mini-stat">
+          <strong>01</strong>
+          <span>Captura</span>
+        </div>
+        <div class="mini-stat">
+          <strong>02</strong>
+          <span>Analiza</span>
+        </div>
+        <div class="mini-stat">
+          <strong>03</strong>
+          <span>Traduce</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="translator-grid">
+      <section class="camera-panel" aria-labelledby="vista-camara-titulo">
+        <div class="panel-heading">
+          <div>
+            <span class="status-dot"></span>
+            <strong id="vista-camara-titulo">Vista de cámara</strong>
+          </div>
+          <span class="small-muted" id="camera-status">Cámara apagada</span>
+        </div>
+
+        <div class="camera-stage">
+          <video id="camera-video" autoplay playsinline muted></video>
+          <div class="camera-placeholder" id="camera-placeholder">
+            <div class="camera-symbol">⌁</div>
+            <strong>Tu cámara aparecerá acá</strong>
+            <span>Ubicá tus manos dentro del encuadre</span>
+          </div>
+          <div class="camera-frame"></div>
+        </div>
+
+        <div class="camera-controls">
+          <button id="start-camera" class="btn btn-primary" type="button">Activar cámara <span>→</span></button>
+          <button id="stop-camera" class="btn btn-outline" type="button" disabled>Detener</button>
+        </div>
+
+        <p class="camera-hint" id="camera-hint">Tu navegador te pedirá permiso para usar la cámara.</p>
+      </section>
+
+      <aside class="result-panel" aria-labelledby="resultado-titulo">
+        <div class="panel-heading">
+          <strong id="resultado-titulo">Resultado de texto</strong>
+          <span class="result-badge">DEMO</span>
+        </div>
+
+        <div class="result-empty">
+          <div class="result-icon">Aa</div>
+          <h3>Tu mensaje aparecerá acá</h3>
+          <p>Cuando se integre un modelo de reconocimiento, las señas detectadas podrán convertirse en texto.</p>
+        </div>
+
+        <div class="result-note">
+          <span>✦</span>
+          <p><strong>Próximo paso</strong><br>Integrar MediaPipe para detectar manos y un modelo entrenado con ejemplos de la lengua de señas elegida.</p>
+        </div>
+      </aside>
+    </div>
+
+    <a class="back-home" href="{{ url_for('index') }}">← Volver a la página principal</a>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
